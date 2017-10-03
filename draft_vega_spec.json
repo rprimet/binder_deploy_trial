@@ -9,7 +9,14 @@
   "encoding": {
     "y": {"field": "ID", "type": "nominal"},
     "x": {"field": "Start", "type": "quantitative"},
-    "x2": {"field": "End", "type": "quantitative"}
+    "x2": {"field": "End", "type": "quantitative"},
+    "color": {"field": "Gender", 
+              "type": "nominal",
+              "scale": {
+                "domain": ["F","M"],
+                 "range": ["#ff99ff","#4169e1"]
+      }
+    }
   }
 }
 
