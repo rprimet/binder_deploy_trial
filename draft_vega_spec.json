@@ -1,6 +1,6 @@
 {
   "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
-  "description": "A simple bar chart with ranged data (aka Gantt Chart).",
+  "description": "Conversation timeline",
   "data": {
     "url": "https://s3-eu-west-1.amazonaws.com/pspea/conv1_processed.tsv",
     "format": "tsv"
