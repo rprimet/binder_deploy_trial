@@ -1,0 +1,15 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "description": "A simple bar chart with ranged data (aka Gantt Chart).",
+  "data": {
+    "url": "https://s3-eu-west-1.amazonaws.com/pspea/conv1_processed.tsv",
+    "format": "tsv"
+  },
+  "mark": "bar",
+  "encoding": {
+    "y": {"field": "ID", "type": "nominal"},
+    "x": {"field": "Start", "type": "quantitative"},
+    "x2": {"field": "End", "type": "quantitative"}
+  }
+}
+
