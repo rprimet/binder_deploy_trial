@@ -19,18 +19,22 @@ class RenderedSpeads extends Widget implements IRenderMime.IRenderer {
 
      this.addClass(SPEADS_CLASS);
      let vgEmbed = document.createElement('div');
-     vgEmbed.innerHTML = "<i>Placeholder</i> -- conversation plot";
+     vgEmbed.innerHTML = '<i>Placeholder</i> -- conversation plot';
      this.node.appendChild(vgEmbed);
-     let audio = document.createElement('audio');
-     this.node.appendChild(audio);
+     this._audio = document.createElement('audio');
+     this._audio.controls = true;
+     this.node.appendChild(this._audio);
   }
 
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-    let data = model.data[SPEADS_MIME_TYPE];
+    let data:any = model.data[SPEADS_MIME_TYPE]; //TODO change typing
     console.log("speads data", data);
+    this._audio.src = data['audio_data'];
 
     return Promise.resolve(undefined);
   }
+
+  _audio: HTMLAudioElement;
 }
 
 export
