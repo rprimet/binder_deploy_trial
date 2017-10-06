@@ -9,76 +9,77 @@
   <div id="vis">Vega-lite placeholder</div>
   <audio id="player" src="conv1.mp3" controls></audio>
   <script>
-    // embed conversation plot
-    let spec = {
-    "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
-    "layer": [
-        {
-            "description": "Conversation timeline",
-            "data": {
-                "url": "https://s3-eu-west-1.amazonaws.com/pspea/conv1_processed.tsv",
-                "format": {
-                    "type": "tsv"
-                }
-            },
-            "mark": "bar",
-            "encoding": {
-                "y": {
-                    "field": "ID",
-                    "type": "nominal"
-                },
-                "x": {
-                    "field": "Start",
-                    "type": "quantitative"
-                },
-                "x2": {
-                    "field": "End",
-                    "type": "quantitative"
-                },
-                "color": {
-                    "field": "Gender",
-                    "type": "nominal",
-                    "scale": {
-                        "domain": [
-                            "F",
-                            "M"
-                        ],
-                        "range": [
-                            "#ff99ff",
-                            "#4169e1"
-                        ]
-                    }
-                }
-            }
-        },
-        {
-            "description": "Tape head",
-            "data": {
-                "values": [
-                    {
-                        "timepos": 42
-                    }
-                ]
-            },
-            "mark": "rule",
-            "encoding": {
-                "x": {
-                    "field": "timepos",
-                    "type": "quantitative"
-                },
-                "size": {
-                    "value": 2
-                },
-                "color": {
-                    "value": "#22aa12"
-                }
-            }
-        }
-    ]
+// embed conversation plot
+let spec = {
+  "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+  "layer": [
+  {
+    "description": "Conversation timeline",
+    "data": {
+      "url": "https://s3-eu-west-1.amazonaws.com/pspea/conv1_processed.tsv",
+      "format": {
+	"type": "tsv"
+      }
+    },
+    "mark": "bar",
+    "encoding": {
+      "y": {
+	"field": "ID",
+	"type": "nominal"
+      },
+      "x": {
+	"field": "Start",
+	"type": "quantitative"
+      },
+      "x2": {
+	"field": "End",
+	"type": "quantitative"
+      },
+      "color": {
+	"field": "Gender",
+	"type": "nominal",
+	"scale": {
+	  "domain": [
+	    "F",
+	    "M"
+	  ],
+	  "range": [
+	    "#ff99ff",
+	    "#4169e1"
+	  ]
+	}
+      }
+    }
+  },
+  {
+    "description": "Tape head",
+    "data": {
+      "name": "timeposDataSource" 
+    },
+    "mark": "rule",
+    "encoding": {
+      "x": {
+	"field": "timepos",
+	"type": "quantitative"
+      },
+      "size": {
+	"value": 2
+      },
+      "color": {
+	"value": "#22aa12"
+      }
+    }
+  }
+  ]
 };
-    vega.embed("#vis", spec);
-    
+vega.embed("#vis", spec)
+.then((viewSpec) => {
+  let view = viewSpec.view;
+  console.log("vega view", view);
+  view.insert("timeposDataSource", [{"timepos": 0}]).run();
+});
 
-    // link audio element position with plot tapehead
+
+// link audio element position with plot tapehead
   </script>
 </html>
