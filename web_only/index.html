@@ -77,9 +77,13 @@ vega.embed("#vis", spec)
   let view = viewSpec.view;
   console.log("vega view", view);
   view.insert("timeposDataSource", [{"timepos": 0}]).run();
+
+  // link audio element position with plot tapehead
+  let audio = document.getElementById("player");
+  audio.ontimeupdate = () => { 
+    view.remove("timeposDataSource", () => true).run();
+    view.insert("timeposDataSource", [{"timepos": audio.currentTime}]).run();
+  };
 });
-
-
-// link audio element position with plot tapehead
   </script>
 </html>
