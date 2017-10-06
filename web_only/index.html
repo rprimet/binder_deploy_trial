@@ -7,7 +7,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vega-embed/3.0.0-beta.20/vega-embed.js"></script>
   </head>
   <div id="vis">Vega-lite placeholder</div>
-  <audio id="player" src="conv1.mp3" controls></audio>
+  <audio id="player" src="conv1.mp3" controls style="width: 800px"></audio>
   <script>
 // embed conversation plot
 let spec = {
@@ -72,7 +72,7 @@ let spec = {
   }
   ]
 };
-vega.embed("#vis", spec)
+vega.embed("#vis", spec, {"actions": false, "width": 800, "height": 600})
 .then((viewSpec) => {
   let view = viewSpec.view;
   console.log("vega view", view);
