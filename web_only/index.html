@@ -11,21 +11,71 @@
   <script>
     // embed conversation plot
     let spec = {
-      "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
-      "description": "A simple bar chart with embedded data.",
-      "data": {
-        "values": [
-          {"a": "A","b": 28}, {"a": "B","b": 55}, {"a": "C","b": 43},
-          {"a": "D","b": 91}, {"a": "E","b": 81}, {"a": "F","b": 53},
-          {"a": "G","b": 19}, {"a": "H","b": 87}, {"a": "I","b": 52}
-        ]
-      },
-      "mark": "bar",
-      "encoding": {
-        "x": {"field": "a", "type": "ordinal"},
-        "y": {"field": "b", "type": "quantitative"}
-      }
-    }
+    "$schema": "https://vega.github.io/schema/vega-lite/v2.json",
+    "layer": [
+        {
+            "description": "Conversation timeline",
+            "data": {
+                "url": "https://s3-eu-west-1.amazonaws.com/pspea/conv1_processed.tsv",
+                "format": {
+                    "type": "tsv"
+                }
+            },
+            "mark": "bar",
+            "encoding": {
+                "y": {
+                    "field": "ID",
+                    "type": "nominal"
+                },
+                "x": {
+                    "field": "Start",
+                    "type": "quantitative"
+                },
+                "x2": {
+                    "field": "End",
+                    "type": "quantitative"
+                },
+                "color": {
+                    "field": "Gender",
+                    "type": "nominal",
+                    "scale": {
+                        "domain": [
+                            "F",
+                            "M"
+                        ],
+                        "range": [
+                            "#ff99ff",
+                            "#4169e1"
+                        ]
+                    }
+                }
+            }
+        },
+        {
+            "description": "Tape head",
+            "data": {
+                "values": [
+                    {
+                        "timepos": 42
+                    }
+                ]
+            },
+            "mark": "rule",
+            "encoding": {
+                "x": {
+                    "field": "timepos",
+                    "type": "quantitative"
+                },
+                "size": {
+                    "value": 2
+                },
+                "color": {
+                    "value": "#22aa12"
+                }
+            }
+        }
+    ]
+};
     vega.embed("#vis", spec);
     
 
