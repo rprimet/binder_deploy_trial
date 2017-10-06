@@ -6,6 +6,8 @@ import {
   IRenderMime
 } from '@jupyterlab/rendermime-interfaces';
 
+import embed = require('vega-embed');
+
 export
 const SPEADS_MIME_TYPE = 'application/vnd.speads+json';
 
@@ -18,23 +20,26 @@ class RenderedSpeads extends Widget implements IRenderMime.IRenderer {
      super();
 
      this.addClass(SPEADS_CLASS);
-     let vgEmbed = document.createElement('div');
-     vgEmbed.innerHTML = '<i>Placeholder</i> -- conversation plot';
-     this.node.appendChild(vgEmbed);
+     this._vgEmbed = document.createElement('div');
+     this._vgEmbed.innerHTML = '<i>Placeholder</i> -- conversation plot';
+     this.node.appendChild(this._vgEmbed);
      this._audio = document.createElement('audio');
      this._audio.controls = true;
      this.node.appendChild(this._audio);
+
+     //set up update callback: audio position -> plot position
   }
 
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-    let data:any = model.data[SPEADS_MIME_TYPE]; //TODO change typing
+    let data:any = model.data[SPEADS_MIME_TYPE]; 
     console.log("speads data", data);
     this._audio.src = data['audio_data'];
 
-    return Promise.resolve(undefined);
+    return embed(this._vgEmbed, data['vis_spec'], {/*'mode': 'vega-lite',*/ 'onBeforeParse': (spec:any) => {console.log('before parse!'); console.log("spec", spec); return spec;}, 'renderer': 'svg', 'logLevel': 'vega.Debug'});
   }
 
   _audio: HTMLAudioElement;
+  _vgEmbed: HTMLElement;
 }
 
 export
