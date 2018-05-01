@@ -6,6 +6,7 @@ import {
   Widget
 } from '@phosphor/widgets';
 
+import embed from 'vega-embed';
 
 /**
  * The default mime type for the extension.
@@ -42,8 +43,8 @@ class OutputWidget extends Widget implements IRenderMime.IRenderer {
    * Render JSON into this widget's node.
    */
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-    this._plot.textContent = JSON.stringify(model.data[this._mimeType]);
     let data:any = model.data[this._mimeType];
+    embed(this._plot, data['vis_spec'], {"actions": false, "width": 800, "height": 600});
     this._audio.src = data['audio_data'];
     return Promise.resolve(void 0);
   }
