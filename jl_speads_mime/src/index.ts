@@ -31,17 +31,26 @@ class OutputWidget extends Widget implements IRenderMime.IRenderer {
     super();
     this._mimeType = options.mimeType;
     this.addClass(CLASS_NAME);
+    this._plot = document.createElement('div');
+    this.node.appendChild(this._plot);
+    this._audio = document.createElement('audio');
+    this._audio.controls = true;
+    this.node.appendChild(this._audio);
   }
 
   /**
    * Render JSON into this widget's node.
    */
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
-    this.node.textContent = JSON.stringify(model.data[this._mimeType]);
+    this._plot.textContent = JSON.stringify(model.data[this._mimeType]);
+    let data:any = model.data[this._mimeType];
+    this._audio.src = data['audio_data'];
     return Promise.resolve(void 0);
   }
 
   private _mimeType: string;
+  private _plot: HTMLElement;
+  private _audio: HTMLAudioElement;
 }
 
 
