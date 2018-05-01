@@ -44,7 +44,16 @@ class OutputWidget extends Widget implements IRenderMime.IRenderer {
    */
   renderModel(model: IRenderMime.IMimeModel): Promise<void> {
     let data:any = model.data[this._mimeType];
-    embed(this._plot, data['vis_spec'], {"actions": false, "width": 800, "height": 600});
+    embed(this._plot, data['vis_spec'], {"actions": false, "width": 800, "height": 600})
+    .then((viewSpec) => {
+      let view = viewSpec.view as any; //typescript typings missing insert/remove ?
+      view.insert("timeposDataSource", [{"timepos": 0}]).run();
+      this._audio.ontimeupdate = () => {
+        view.remove("timeposDataSource", () => true).run();
+        view.insert("timeposDataSource", [{"timepos": this._audio.currentTime}]).run();
+      }
+
+    });
     this._audio.src = data['audio_data'];
     return Promise.resolve(void 0);
   }
