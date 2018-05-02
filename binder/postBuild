@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd jl_speads_mime && npm install && jupyter labextension link .
