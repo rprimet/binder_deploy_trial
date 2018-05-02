@@ -63,14 +63,17 @@ dependencies:
   - cryptography=2.2.1=py36h14c3975_0
   - idna=2.6=py36h82fb2a8_1
   - intel-openmp=2018.0.0=8
+  - ipywidgets=7.2.1=py36_0
   - jupyterlab=0.32.0=py36_0
   - libffi=3.2.1=hd88cf55_4
+  - libgcc=7.2.0=h69d50b8_2
   - libgcc-ng=7.2.0=hdf63c60_3
   - libgfortran-ng=7.2.0=hdf63c60_3
   - libstdcxx-ng=7.2.0=hdf63c60_3
   - mkl=2018.0.2=1
   - mkl_fft=1.0.1=py36h3010b51_0
   - mkl_random=1.0.1=py36h629b387_0
+  - nodejs=8.9.3=h439df22_0
   - numpy=1.14.2=py36hdbf6ddf_1
   - openssl=1.0.2o=h20670df_0
   - pandas=0.22.0=py36hf484d3e_0
@@ -80,5 +83,15 @@ dependencies:
   - pytz=2018.3=py36_0
   - requests=2.18.4=py36he2e5f8d_1
   - urllib3=1.22=py36hbe7ace6_0
+  - widgetsnbextension=3.2.1=py36_0
+  - pip:
+    - arrow==0.12.1
+    - binaryornot==0.4.4
+    - click==6.7
+    - cookiecutter==1.6.0
+    - future==0.16.0
+    - jinja2-time==0.2.0
+    - poyo==0.4.1
+    - whichcraft==0.4.1
 prefix: /home/romain/miniconda3/envs/jpallgo
 
