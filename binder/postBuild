@@ -1,3 +1,4 @@
 #!/bin/sh
 
-cd jl_speads_mime && npm install && jupyter labextension link .
+cd jl_speads_mime && npm install && jupyter labextension link . && cd -
+cd jl_speads_mime/ipyspeads && pip install . && cd -
